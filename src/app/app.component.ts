@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { FormControl } from '@angular/forms';
+import { PatientService } from './services/patient.service';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +8,11 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'interoperabilidad';
-}
+  public formatType = new FormControl('json');
+
+  constructor(private patientService: PatientService) {
+    this.formatType.valueChanges.subscribe((data: string) => {
+      patientService._formatType.next(data);
+    });
+  }
+}  

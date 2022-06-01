@@ -1,0 +1,12 @@
+<mat-card class="dialog">
+    <mat-card-header class="dialog__header">
+        <mat-card-title>{{ props.title }}</mat-card-title>
+    </mat-card-header>
+    <mat-card-content class="dialog__content">
+        <p>{{ props.description }}</p>
+    </mat-card-content>
+    <mat-card-actions class="dialog__actions">
+        <button *ngIf="showButtonAccept" mat-button class="button" (click)="onSubmit()">{{ titleButtonAccept }}</button>
+        <button *ngIf="showButtonCancel" mat-button class="button" mat-dialog-close>{{ titleButtonCancel }}</button>
+    </mat-card-actions>
+</mat-card>

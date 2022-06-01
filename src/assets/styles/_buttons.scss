@@ -1,0 +1,12 @@
+@import './colors';
+
+.button {
+    background-color: $_fondoIntermedio;
+    color: $_fondoBlanco;
+    margin: 0px 2px !important;
+    width: 110px;
+
+    &:disabled {
+        background-color: $_fondoGris3;
+    }
+}

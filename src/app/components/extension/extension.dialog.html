@@ -1,0 +1,25 @@
+<mat-card class="dialog">
+    <mat-card-header class="dialog__header">
+        <mat-card-title>Nueva extensión</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+        <form (ngSubmit)="onSubmit()" autocomplete="off">
+            <mat-form-field style="width: 100%;">
+                <input matInput type="text" [formControl]="extensionCtrl" placeholder="Nombre"/>
+            </mat-form-field>
+            <mat-error *ngIf="extensionCtrl.invalid && extensionCtrl.touched && !errorSpaces" class="field-error">
+                <span>Valor inválido</span>
+            </mat-error>
+            <mat-error *ngIf="errorSpaces" class="field-error">
+                <span>No se pueden agregar espacios</span>
+            </mat-error>
+            <mat-error *ngIf="errorDuplicate" class="field-error">
+                <span>Extensión existente</span>
+            </mat-error>
+        </form>
+    </mat-card-content>
+    <mat-card-actions class="dialog__actions">
+        <button mat-button class="button" (click)="onSubmit()" [disabled]="extensionCtrl.invalid || errorSpaces || errorDuplicate">Crear</button>
+        <button mat-button class="button" mat-dialog-close>Cancelar</button>
+    </mat-card-actions>
+</mat-card>

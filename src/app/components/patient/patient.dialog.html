@@ -1,0 +1,64 @@
+<mat-card class="dialog" style="max-width: initial; width: 480px">
+    <mat-card-header class="dialog__header">
+        <mat-card-title>
+            <ng-container *ngIf="type === 'N'; else editTemplate">Agregar Registro</ng-container>
+            <ng-template #editTemplate>Editar Registro</ng-template>            
+        </mat-card-title>
+    </mat-card-header>
+    <mat-card-content id="card-content-scroll" class="dialog__content">
+        <form [formGroup]="patientForm" (ngSubmit)="onSubmit()" autocomplete="off" *ngIf="!showSend">
+            <div *ngFor="let item of fields">
+                <mat-form-field *ngIf="item.type === 'text'">
+                    <input matInput [type]="item.type" [formControlName]="item.control" [placeholder]="item.placeholder"/>
+                </mat-form-field>
+                <mat-form-field *ngIf="item.type === 'select'">
+                    <mat-select matInput type="text" [formControlName]="item.control" [placeholder]="item.placeholder">
+                        <mat-option [value]="'female'">Mujer</mat-option>
+                        <mat-option [value]="'male'">Hombre</mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <mat-form-field *ngIf="item.type === 'date'">
+                    <input matInput type="datetime" [formControlName]="item.control" [placeholder]="item.placeholder" [matDatepicker]="pickerDate"/>
+                    <mat-datepicker-toggle matSuffix [for]="pickerDate"></mat-datepicker-toggle>
+                    <mat-datepicker #pickerDate></mat-datepicker>
+                  </mat-form-field>
+                <mat-error *ngIf="patientForm.controls[item.control].invalid && patientForm.controls[item.control].touched">
+                    <span>Valor inválido</span>
+                </mat-error>
+            </div>
+        </form>
+        <div *ngIf="showSend">
+            <ng-container *ngIf="showJson; else xmlTemplate">
+                <pre>{{ bodyJson | json }}</pre>
+            </ng-container>
+            <ng-template #xmlTemplate>
+                <p *ngFor="let item of bodyXml" class="mb-0" [ngStyle]="{'margin-left': item.margin + 'px'}">{{ item.value }}</p>
+            </ng-template>
+            
+        </div>
+    </mat-card-content>
+    <mat-card-actions class="dialog__actions">
+        <div>
+            <div>
+                <button mat-button class="button" (click)="onViewSend()" *ngIf="sended">
+                    <ng-container *ngIf="showSend; else sendTemplate">Data</ng-container>
+                    <ng-template #sendTemplate>Envío</ng-template>
+                </button>
+                <button mat-button class="button" (click)="onViewJson()" *ngIf="sended && showSend">
+                    <ng-container *ngIf="showJson; else sendTemplate">XML</ng-container>
+                    <ng-template #sendTemplate>Json</ng-template>
+                </button>
+                <button mat-button class="button" (click)="onSubmit()" [disabled]="patientForm.invalid || loading" *ngIf="!sended">Guardar</button>
+                <button mat-button class="button" (click)="onSubmit(true)" [disabled]="!showDeleteButton || loading" *ngIf="!sended">Eliminar</button>
+                <button mat-button class="button" (click)="onClose()">
+                    <ng-container *ngIf="sended; else cancelTemplate">Cerrar</ng-container>
+                    <ng-template #cancelTemplate>Cancelar</ng-template>
+                </button>
+            </div>
+            <div class="spinner" *ngIf="loading">
+                <mat-spinner [diameter]="30" class="spinner__img"></mat-spinner>
+                <span class="spinner__text">Guardando...</span>
+            </div>
+        </div>
+    </mat-card-actions>
+</mat-card>

@@ -1,1 +1,66 @@
-/* You can add global styles to this file, and also import other style files */
+@import './assets/styles/module';
+
+*, *:before, *:after {
+    box-sizing: border-box;
+}
+
+html {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Raleway', sans-serif;
+    min-height: 100vh;
+    margin: 0;
+}
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.container-table {
+    max-height: 70vh;
+    overflow-y: auto;
+    margin-bottom: 1.2rem;
+}
+
+.table {
+    &__buttons {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+}
+
+.field-error {
+    margin-top: -15px;
+}
+
+.spinner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 0.7rem;
+
+    &__img {
+        width: 30px;
+        height: 30px;
+        margin: 0 !important;
+    }
+
+    &__text {
+        margin-left: 0.4rem;
+        font-size: 1rem;
+    }
+}
+
+.footer-main {
+    text-align: center;
+    position: absolute;
+    padding: 0.4rem;
+    bottom: 0;
+    width: 100%;
+}
+
+.background {
+    background: $_fondoIntermedio;
+}
