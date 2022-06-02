@@ -5,7 +5,6 @@ import { catchError, tap, map } from "rxjs/operators";
 import { TypesEnum } from "src/app/enums/types.enum";
 import { PatientModel, PatientPostModel, PatientPutModel } from "../models/patient.model";
 import { environment } from "src/environments/environment";
-import { PatientExample } from "../models/patient.example";
 
 @Injectable({ providedIn: 'root' })
 export class PatientService {
@@ -25,12 +24,10 @@ export class PatientService {
     }
 
     getPatientList(): Observable<any> {
-        const example = new PatientExample();
         return this.http.get<any>(this.patientUrl).pipe(
             tap(() => this.log(`getPatientList`)),
             catchError((error) => this.handleError('getPatientList', error))
         );
-        // return of(example.patientsJson());
     }
 
     getExtensions(patients: PatientModel[], extensions: string[]): string[] {
