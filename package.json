@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "npm run start",
+    "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
@@ -21,7 +21,6 @@
     "@angular/platform-browser-dynamic": "~13.3.0",
     "@angular/router": "~13.3.0",
     "bootstrap": "^5.1.3",
-    "firebase-tools": "^11.0.1",
     "jquery": "^3.6.0",
     "moment": "^2.29.3",
     "popper.js": "^1.16.1",
